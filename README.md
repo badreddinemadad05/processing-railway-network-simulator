@@ -1,111 +1,159 @@
-# Railway Dispatching Simulation with Processing
+# Processing Railway Network Simulator
 
-## Description
+## Overview
 
-Ce projet est une simulation visuelle d'un reseau ferroviaire realisee avec Processing. Il met en scene quatre gares principales, quatre gares secondaires, plusieurs bandes de circulation, des deviations et des feux de signalisation pour piloter les deplacements de trains entre differentes destinations.
+This project is a railway traffic simulation built with Processing in Java mode. It visualizes train movements across a small rail network composed of four main stations, four secondary stations, straight track sections, switches, curved junctions, and traffic lights.
 
-L'objectif principal est de simuler la circulation, l'occupation des voies, la gestion des conflits et certains mecanismes de retour lorsqu'une situation de collision ou de blocage est detectee.
+The application was designed as an academic simulation project focused on train dispatching, track occupation, and basic collision-handling scenarios inside a shared railway infrastructure.
 
-## Objectifs
+## Project Goals
 
-- Simuler les trajets de trains entre plusieurs gares.
-- Visualiser l'etat du reseau ferroviaire en temps reel.
-- Gerer l'attribution des voies en gare.
-- Modeliser des zones critiques avec aiguillages, deviations et feux.
-- Detecter certains conflits de circulation et declencher des retours automatiques.
+- Simulate train movement between multiple stations
+- Visualize railway traffic in real time
+- Manage station capacity and track assignment
+- Model switches, curved track sections, and signaling
+- Detect selected traffic conflicts and trigger return procedures
 
-## Fonctionnalites
+## Main Features
 
-- Interface graphique sous Processing.
-- Generation manuelle de trains via 12 boutons de trajet.
-- Affichage de 4 gares principales : `Gare1`, `Gare2`, `Gare3`, `Gare4`.
-- Affichage de 4 gares secondaires : `SA`, `SB`, `SC`, `SD`.
-- Gestion des bandes horizontales de circulation.
-- Gestion des deviations via courbes de Bezier.
-- Feux rouges et verts selon la capacite des gares.
-- Panneau de dispatching avec informations sur le train selectionne.
-- Detection de collisions sur certains itineraires avec procedure de retour.
+- Interactive graphical simulation built with Processing
+- Manual train creation through 12 route buttons
+- Four main stations: `Gare1`, `Gare2`, `Gare3`, `Gare4`
+- Four secondary stations: `SA`, `SB`, `SC`, `SD`
+- Straight track segments and Bezier-based curved deviations
+- Signal lights that react to station occupancy
+- Dispatching panel showing information about a selected train
+- Collision and congestion management for specific traffic situations
 
-## Technologies utilisees
+## How It Works
 
-- Processing / Java mode
-- API graphique Processing (`PApplet`, `PImage`, primitives de dessin)
-- Collections Java (`ArrayList`)
+The simulation starts by building the full rail network inside the main sketch:
 
-## Structure du projet
+- stations and secondary stations are positioned on the canvas
+- tracks, switches, and curved deviations are created
+- signal lights are initialized
+- image assets are loaded from the `data/` directory
+- route buttons are displayed for train spawning
+
+During execution, the program continuously:
+
+- redraws the railway map
+- updates train positions
+- manages station entry and exit
+- assigns free tracks
+- updates traffic lights
+- applies route-specific logic
+- handles selected collision and return cases
+
+## Technologies Used
+
+- Processing
+- Java mode for Processing
+- Processing graphics API (`PApplet`, `PImage`, drawing primitives)
+- Java collections (`ArrayList`)
+
+## Project Structure
 
 ```text
-groupe-10-EL HARCHA-ESSALHI-MADAD-FASKA-processing/
+processing-railway-network-simulator/
 |-- Processing/
-|   |-- redaprocessingaout.pde   # sketch principal : setup, draw, creation du reseau, routage
-|   |-- Train.pde                # modele d'un train et etat de circulation
-|   |-- Gare.pde                 # gestion des gares principales
-|   |-- GareSecondaire.pde       # gestion des gares secondaires
-|   |-- Bande.pde                # segments droits de circulation
-|   |-- Deviation.pde            # courbes, ralentissements et retours
-|   |-- Aiguillage.pde           # aiguillages et orientation des sorties
-|   |-- Feu.pde                  # signalisation
-|   |-- dispatching.pde          # panneau d'information de supervision
-|   |-- Bouton.pde               # boutons d'interface pour lancer les trains
-|   |-- Itineraire.pde           # structure d'itineraire peu exploitee
-|   |-- data/                    # images du train, des gares et autres ressources
+|   |-- redaprocessingaout.pde   # Main sketch: setup, draw, network initialization, routing
+|   |-- Train.pde                # Train model and movement state
+|   |-- Gare.pde                 # Main station logic
+|   |-- GareSecondaire.pde       # Secondary station logic
+|   |-- Bande.pde                # Straight track sections
+|   |-- Deviation.pde            # Curved routes, return logic, collision handling
+|   |-- Aiguillage.pde           # Switch management
+|   |-- Feu.pde                  # Traffic light logic
+|   |-- dispatching.pde          # Dispatching / supervision panel
+|   |-- Bouton.pde               # UI buttons for spawning trains
+|   |-- Itineraire.pde           # Simple itinerary structure
+|   |-- data/                    # Images and supporting resources
 |-- rapportProjetGroupeProcessing.pdf
 |-- README.md
 ```
 
 ## Installation
 
-### Prerequis
+### Requirements
 
-- Processing IDE 4.x recommande
+- Processing IDE 4.x recommended
 
-### Etapes
+### Steps
 
-1. Ouvrir Processing IDE.
-2. Ouvrir le dossier `Processing/` du projet.
-3. Verifier que le dossier `Processing/data/` contient bien les images utilisees par `loadImage(...)`.
-4. Lancer le sketch principal en ouvrant `redaprocessingaout.pde`.
+1. Open Processing IDE.
+2. Open the `Processing/` folder from this project.
+3. Make sure the `Processing/data/` folder is present and still contains the required image assets.
+4. Run the main sketch from `redaprocessingaout.pde`.
 
-## Utilisation
+## Usage
 
-- Au lancement, l'application affiche le reseau ferroviaire.
-- Les boutons en bas de l'ecran permettent de generer un train pour un trajet donne.
-- Un clic sur un train affiche ses informations dans le panneau de dispatching.
-- Les trains se deplacent selon leur route, les disponibilites de voies et certaines regles de securite.
+- Launch the sketch in Processing.
+- Use the route buttons at the bottom of the window to spawn trains.
+- Click on a train to display its information in the dispatching panel.
+- Observe how trains move through stations, secondary hubs, switches, and curved segments while the system manages occupancy and some conflict situations.
 
 ## Configuration
 
-Le projet ne contient pas de fichier de configuration externe.
+This project does not use an external configuration file.
 
-Les principaux parametres sont codifies directement dans les fichiers `.pde` :
+Most parameters are hard-coded inside the `.pde` files, including:
 
-- dimensions de la fenetre dans `redaprocessingaout.pde`
-- coordonnees des gares, bandes et deviations
-- capacite des gares
-- delais de pause et vitesses sur courbes
+- window size
+- station coordinates
+- track geometry
+- station capacity
+- pause durations
+- Bezier movement speeds
 
-## Base de donnees
+## Database
 
-Aucune base de donnees n'est utilisee dans ce projet.
+No database is used in this project.
 
-## API / Scripts
+## API / Backend
 
-- Aucune API distante
-- Aucun script backend
-- Toute la logique est embarquee dans le sketch Processing
+This project does not include:
 
-## Docker / Docker Compose
+- a remote API
+- a backend service
+- database access
+- deployment scripts
 
-Ce projet ne contient ni `Dockerfile` ni configuration `docker-compose`.
+All logic is embedded directly in the Processing sketch files.
 
-## Remarques techniques importantes
+## Docker
 
-- Certains trajets sont proposes dans l'interface mais non implementes dans la logique principale, notamment `G1 -> G3` et `G3 -> G1`.
-- Le fichier `Train.pde` attribue l'identifiant via un compteur d'instance au lieu d'un compteur statique, ce qui peut produire des identifiants dupliques.
-- Plusieurs variables et ressources semblent non utilisees ou partiellement exploitees (`Itineraire`, `image_raille`, certains fichiers images et PDF dans `data/`).
-- Des problemes d'encodage sont visibles dans plusieurs chaines de caracteres, probablement dus a un melange UTF-8 / ANSI.
-- Les PDF presents dans `Processing/data/` paraissent etre des documents de travail et non des dependances d'execution.
+There is no `Dockerfile` or `docker-compose` configuration in this repository.
 
-## Statut
+## Important Technical Notes
 
-Projet academique de simulation ferroviaire sous Processing.
+- Some routes appear in the interface but are not fully implemented in the main movement logic, especially `G1 -> G3` and `G3 -> G1`.
+- The project contains some unused or partially used resources and variables, such as `Itineraire`, `image_raille`, and a few files stored in `Processing/data/`.
+- Several strings in the source code show encoding issues, likely caused by a UTF-8 / ANSI mismatch.
+- The `Processing/data/` folder also contains PDF files that look like project or course documents rather than runtime dependencies.
+
+## Strengths
+
+- Clear visual representation of a railway network
+- Good educational value for railway dispatching concepts
+- Separation of logic across multiple Processing tabs
+- Includes supervision, signaling, and route management ideas
+
+## Limitations
+
+- The routing logic is highly centralized in the main sketch
+- Some route flows are incomplete
+- The project does not include automated tests
+- Several rules are implemented with hard-coded conditions, which makes maintenance more difficult
+
+## Authors
+
+- Group 10
+- EL HARCHA
+- ESSALHI
+- MADAD
+- FASKA
+
+## Status
+
+Academic Processing project for railway dispatching and traffic simulation.
