@@ -106,14 +106,6 @@ Ce projet ne contient ni `Dockerfile` ni configuration `docker-compose`.
 - Des problemes d'encodage sont visibles dans plusieurs chaines de caracteres, probablement dus a un melange UTF-8 / ANSI.
 - Les PDF presents dans `Processing/data/` paraissent etre des documents de travail et non des dependances d'execution.
 
-## Auteurs
-
-- Groupe 10
-- EL HARCHA
-- ESSALHI
-- MADAD
-- FASKA
-
 ## Statut
 
 Projet academique de simulation ferroviaire sous Processing.
